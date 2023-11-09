@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation</title>
+  <style>
+    #namehead, #emailhead, #phhead ,#passhead, #cphead,#clghead,#nathead{
+        
+        font-size:1.2rem;
+    }
+    #fullName,#email,#phoneNumber,#password,#confirmPassword,#sub-btn,#native,#college{
+        background-color:burlywood;
+        color:black;
+    }
+    h1{
+      font-size:2.5rem;
+      text-align: center;
+    }
+    
+        
+    form{
+      background-color: antiquewhite;
+      border:2px black;
+      width:fit-content;
+      padding:20px;
+      border-radius: 5%;
+        
+    }
+    .form-container{
+      display:flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    
+
+  </style>
+  <script>
+    function validateForm() {
+      // Get form inputs
+      var fullName = document.forms["myForm"]["fullName"].value;
+      var email = document.forms["myForm"]["email"].value;
+      var phoneNumber = document.forms["myForm"]["phoneNumber"].value;
+      var password = document.forms["myForm"]["password"].value;
+      var confirmPassword = document.forms["myForm"]["confirmPassword"].value;
+
+      // Reset error messages
+      document.getElementById("error").innerHTML = "";
+
+      // Validate full name
+      if (fullName.length < 5) {
+        document.getElementById("error").innerHTML = "*Name must be at least 5 characters long";
+        return false;
+      }
+
+      // Validate email
+      if (email.indexOf("@") === -1) {
+        document.getElementById("error").innerHTML = "*Enter a valid email address";
+        return false;
+      }
+
+      // Validate phone number
+      if (phoneNumber.length !== 10 || phoneNumber === "123456789" || isNaN(phoneNumber)) {
+        document.getElementById("error").innerHTML = "*Enter a valid 10-digit phone number";
+        return false;
+      }
+
+      // Validate password
+      if (password.length < 8 || password === "password" || password === fullName) {
+        document.getElementById("error").innerHTML = "*Enter a strong password.<br>Password cannot be 'password' or 'name of the user' or less than 8 characters";
+        return false;
+      }
+
+      // Validate confirm password
+      if (password !== confirmPassword) {
+        document.getElementById("error").innerHTML = "*Passwords do not match";
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Form Validation</h1>
+  <section class="form-container">
+  <form name="myForm" onsubmit="return validateForm()">
+    
+      <div>
+      <label for="fullName" id="namehead">Full Name:</label>
+      <input type="text" id="fullName" name="fullName" placeholder="Enter a name" required>
+    </div>
+    <br>
+    <div>
+      <label for="email" id="emailhead">Email ID:</label>
+      <input type="email" id="email" name="email" placeholder="enter email-id" required>
+    </div>
+    <br>
+    <div>
+      <label for="phoneNumber" id="phhead">Phone Number:</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber"placeholder="enter a contact number" required>
+    </div>
+    <br>
+    <div>
+      <label for="college" id="clghead">College Name:</label>
+      <input type="college" id="college" name="college" placeholder="enter your college name" required>
+    </div>
+    <br>
+    <div>
+      <label for="native" id="nathead">Native:</label>
+      <input type="native" id="native" name="native" placeholder="enter your native" required>
+    </div>
+    <br>
+    <div>
+      <label for="password" id="passhead">Password:</label>
+      <input type="password" id="password" name="password" placeholder="enter a password" required>
+    </div>
+    <br>
+    <div>
+      <label for="confirmPassword" id="cphead">Confirm Password:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    <br>
+    <div>
+      <input type="submit" id="sub-btn" value="Submit">
+    </div>
+    </form>
+  </section>
+  <p id="error"></p>
+</body>
+</html>
